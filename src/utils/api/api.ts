@@ -18,7 +18,7 @@ export const API = new class APIClass {
 
     public async PutPatientDetails(id: string, model: PatientModel): Promise<void> {
         await fetch(this.buildPath(`patients/${id}`), {
-            method: "POST",
+            method: "PUT",
             body: JSON.stringify(model)
         });
     }
