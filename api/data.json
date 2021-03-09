@@ -43,62 +43,126 @@
             "firstName": "Bobbie",
             "lastName": "Craft",
             "image": "http://placeimg.com/640/480/people?id=6",
-            "dateOfBirth": "1993-09-28"
+            "dateOfBirth": "1993-09-28",
+            "phoneNumber": "3039685251",
+            "address": {
+                "address1": "1 Hudson Ave.",
+                "zipCode": "26554",
+                "city": "Fairmont",
+                "state": "WV"
+            }
         },
         {
             "id": 124,
             "firstName": "Vinnie",
             "lastName": "Conroy",
             "image": "http://placeimg.com/640/480/people?id=124",
-            "dateOfBirth": "1962-05-15"
+            "dateOfBirth": "1962-05-15",
+            "phoneNumber": "7608462022",
+            "address": {
+                "address1": "896 Elmwood Dr.",
+                "zipCode": "32806",
+                "city": "Orlando",
+                "state": "FL"
+            }
         },
         {
             "id": 234,
             "firstName": "Eli",
             "lastName": "Mcculloch",
             "image": "http://placeimg.com/640/480/people?id=234",
-            "dateOfBirth": "1988-12-23"
+            "dateOfBirth": "1988-12-23",
+            "phoneNumber": "9542308298",
+            "address": {
+                "address1": "36 Mammoth Street",
+                "zipCode": "49464",
+                "city": "Zeeland",
+                "state": "MI"
+            }
         },
         {
             "id": 536,
             "firstName": "Shana",
             "lastName": "Wall",
             "image": "http://placeimg.com/640/480/people?id=536",
-            "dateOfBirth": "1997-08-15"
+            "dateOfBirth": "1997-08-15",
+            "phoneNumber": "9787631921",
+            "address": {
+                "address1": "8 Cedar Dr.",
+                "zipCode": "01020",
+                "city": "Chicopee",
+                "state": "MA"
+            }
         },
         {
             "id": 856,
             "firstName": "Zofia",
             "lastName": "Barker",
             "image": "http://placeimg.com/640/480/people?id=856",
-            "dateOfBirth": "1987-10-05"
+            "dateOfBirth": "1987-10-05",
+            "phoneNumber": "2709009202",
+            "address": {
+                "address1": "9 Prairie Street",
+                "zipCode": "17402",
+                "city": "York",
+                "state": "PA"
+            }
         },
         {
             "id": 978,
             "firstName": "Dainton",
             "lastName": "Potter",
-            "image": "http://placeimg.com/640/480/people?id=978"
+            "image": "http://placeimg.com/640/480/people?id=978",
+            "dateOfBirth": "1967-12-08",
+            "phoneNumber": "6199645205",
+            "address": {
+                "address1": "483 Bayberry Drive",
+                "zipCode": "11757",
+                "city": "Lindenhurst",
+                "state": "NY"
+            }
         },
         {
             "id": 1654,
             "firstName": "Madiha",
             "lastName": "Galloway",
             "image": "http://placeimg.com/640/480/people?id=1654",
-            "dateOfBirth": "1991-06-05"
+            "dateOfBirth": "1991-06-05",
+            "phoneNumber": "3034521032",
+            "address": {
+                "address1": "83 Rocky River Ave.",
+                "zipCode": "37205",
+                "city": "Nashville",
+                "state": "TN"
+            }
         },
         {
             "id": 1909,
             "firstName": "Bogdan",
             "lastName": "Huber",
             "image": null,
-            "dateOfBirth": "1986-12-07"
+            "dateOfBirth": "1986-12-07",
+            "phoneNumber": "9107054038",
+            "address": {
+                "address1": "79 Edgewood St.",
+                "zipCode": "06790",
+                "city": "Torrington",
+                "state": "CT"
+            }
         },
         {
             "id": 2623,
             "firstName": "Yasemin",
             "lastName": "Jeffery",
             "image": "http://placeimg.com/640/480/people?id=2623",
-            "dateOfBirth": "1977-04-30"
+            "dateOfBirth": "1977-04-30",
+            "phoneNumber": "2122795524",
+            "address": {
+                "address1": "60 Brandywine Drive",
+                "zipCode": "30815",
+                "city": "Hephzibah",
+                "state": "GA"
+            }
         }
     ]
 }
