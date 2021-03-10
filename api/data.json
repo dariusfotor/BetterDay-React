@@ -1,18 +1,6 @@
 {
   "patients": [
     {
-      "id": 6,
-      "fullName": "Bobbie Craft"
-    },
-    {
-      "id": 124,
-      "fullName": "Vinnie Conroy"
-    },
-    {
-      "id": 234,
-      "fullName": "Eli Mcculloch"
-    },
-    {
       "id": 536,
       "fullName": "Shana Wall"
     },
@@ -38,48 +26,6 @@
     }
   ],
   "patientsDetails": [
-    {
-      "id": 6,
-      "firstName": "Bobbie",
-      "lastName": "Craft",
-      "image": "http://placeimg.com/640/480/people?id=6",
-      "dateOfBirth": "1993-09-28",
-      "phoneNumber": "3039685251",
-      "address": {
-        "address1": "1 Hudson Ave.",
-        "zipCode": "26554",
-        "city": "Fairmont",
-        "state": "WV"
-      }
-    },
-    {
-      "id": 124,
-      "firstName": "Vinnie",
-      "lastName": "Conroy",
-      "image": "http://placeimg.com/640/480/people?id=124",
-      "dateOfBirth": "1962-05-15",
-      "phoneNumber": "7608462022",
-      "address": {
-        "address1": "896 Elmwood Dr.",
-        "zipCode": "32806",
-        "city": "Orlando",
-        "state": "FL"
-      }
-    },
-    {
-      "id": 234,
-      "firstName": "Eli",
-      "lastName": "Mcculloch",
-      "image": "http://placeimg.com/640/480/people?id=234",
-      "dateOfBirth": "1988-12-23",
-      "phoneNumber": "9542308298",
-      "address": {
-        "address1": "36 Mammoth Street",
-        "zipCode": "49464",
-        "city": "Zeeland",
-        "state": "MI"
-      }
-    },
     {
       "id": 536,
       "firstName": "Shana",
