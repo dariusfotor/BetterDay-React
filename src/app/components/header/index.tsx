@@ -1,22 +1,20 @@
-import { colors } from '../../styles/colors'
 import styled from 'styled-components'
+import { AppBar, Toolbar } from "@material-ui/core";
 const Header = () => {
+  const displayDesktop = () => {
+    return <Toolbar>Patients API</Toolbar>;
+  };
   return (
     <Container>
-      <div className='title'>
-        <h3>Patients API</h3>
-      </div>
+      <header>
+      <AppBar>{displayDesktop()}</AppBar>
+      </header>
     </Container>
   )
 }
 
 export default Header
 const Container = styled.div`
-  width: 100%;
-  height: 80px;
-  background-color: ${colors.grey};
-  .title{
-    margin-left: 20px;
-    font-size: 25px;
-  }
+margin-bottom: 80px;
+
 `

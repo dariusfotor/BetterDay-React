@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { useHistory } from 'react-router'
-import { updatePatient, getPatient } from '../../modules/actions'
-import { colors } from '../../styles/colors'
+import { updatePatient, getPatientById } from '../../modules/actions'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useParams } from 'react-router-dom'
 import { PatientDetailsType } from '../../modules/types'
@@ -11,8 +10,8 @@ import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import Button from '@material-ui/core/Button'
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace'
-import { TextField } from '../forms/text-field'
-import { DatePicker } from '../forms/date-picker'
+import { TextField } from '../forms-components/text-field'
+import { DatePicker } from '../forms-components/date-picker'
 
 interface RouteParams {
   id: string
@@ -23,9 +22,9 @@ const EditPatientForm = () => {
   const history = useHistory()
   const [patientById, setPatientById] = React.useState<PatientDetailsType>()
   const { id } = useParams<RouteParams>()
- 
+
   useEffect(() => {
-    getPatient(+id).then(setPatientById)
+    getPatientById(+id).then(setPatientById)
   }, [id])
 
   const phoneRegex = /^(\+370|8)\d{8}$/
@@ -69,8 +68,8 @@ const EditPatientForm = () => {
     initialValues: getInitialValues(),
     validationSchema: PatientSchema,
     onSubmit: (values) => {
-      updatePatient(values, patientById?.id);
-      history.goBack();
+      updatePatient(values, patientById?.id)
+      history.goBack()
     },
   })
 
@@ -79,7 +78,7 @@ const EditPatientForm = () => {
     if (patientById) {
       formik.setValues(getInitialValues())
     }
-  }, [patientById, formik, getInitialValues])
+  }, [patientById])
 
   if (!patientById) {
     return null
@@ -93,7 +92,7 @@ const EditPatientForm = () => {
         startIcon={<KeyboardBackspaceIcon />}
         onClick={() => history.goBack()}
       />
-      <form onSubmit={formik.handleSubmit}>
+      <form className="form" onSubmit={formik.handleSubmit}>
         <div>
           <h3>
             Redaguoti {patientById.firstName + ' ' + patientById.lastName}
@@ -166,7 +165,7 @@ const EditPatientForm = () => {
           onChange={formik.handleChange}
         />
         <Button color="primary" variant="contained" fullWidth type="submit">
-          Submit
+          Išsaugoti
         </Button>
       </form>
     </Container>
@@ -175,20 +174,16 @@ const EditPatientForm = () => {
 
 export default EditPatientForm
 const Container = styled.div`
+width: 1200px;
+margin: auto;
+
+
+  .form {
+    width: 600px;
+    
+  }
   .form-group {
     display: flex;
     flex-direction: column;
-  }
-  input {
-    width: 300px;
-  }
-  label {
-    margin-right: 10px;
-  }
-  .invalid-feedback {
-    color: ${colors.red};
-  }
-  .buttons-container {
-    margin-top: 10px;
   }
 `

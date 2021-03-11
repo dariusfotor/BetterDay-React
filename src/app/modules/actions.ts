@@ -11,7 +11,7 @@ export const getPatients = () => {
   }
 };
 
-export const getPatient = (id: number) => {
+export const getPatientById = (id: number) => {
   try {
     return axios
       .get(`http://localhost:3010/patientsDetails/${id}`)
@@ -24,13 +24,14 @@ export const getPatient = (id: number) => {
 };
 
 export const updatePatient = async (objectPatients: any, id?: number) => {
+  console.log(objectPatients)
   try {
     await axios
-      .get(`http://localhost:3010/patientsDetails/${id}`, objectPatients)
+      .patch(`http://localhost:3010/patientsDetails/${id}`, objectPatients)
       .then((response) => response.data);
-    // await axios
-    //   .get(`http://localhost:3010/patients/${id}`, {fullName: objectPatients.fullName})
-    //   .then((response) => console.log(response.data));
+    await axios
+      .patch(`http://localhost:3010/patients/${id}`, {fullName: objectPatients.firstName + " " + objectPatients.lastName })
+      .then((response) => console.log(response.data));
   } catch (err) {
     console.log(err);
   }

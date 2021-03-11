@@ -45,8 +45,8 @@
       "firstName": "Zofia",
       "lastName": "Barker",
       "image": "http://placeimg.com/640/480/people?id=856",
-      "dateOfBirth": "1987-10-05",
-      "phoneNumber": "2709009202",
+      "dateOfBirth": "1987-10-04T21:00:00.000Z",
+      "phoneNumber": "866789789",
       "address": {
         "address1": "9 Prairie Street",
         "zipCode": "17402",
