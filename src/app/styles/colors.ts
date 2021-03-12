@@ -17,7 +17,8 @@ export const colors = {
   violet: '#8939EF',
   purple: '#E039EF',
   pink: '#EF399B',
-  red: '#ff0000'
+  red: '#ff0000',
+  header: '#2E3B55'
 };
 
 export default colors;

@@ -1,20 +1,15 @@
-import React from 'react';
-import { RouteComponentProps } from "react-router";
+import React from 'react'
+import { RouteComponentProps } from 'react-router'
 import PatientPage from '../components/patientPage'
-import Header from '../components/header'
 import styled from 'styled-components'
 
-export const PatientHomePage: React.FC<RouteComponentProps> = props => {
-    return (
-        <React.Fragment>
-        <Header />
-        <Container>
-            <PatientPage />
-        </Container>
-        </React.Fragment>
-    );
+export const PatientHomePage: React.FC<RouteComponentProps> = (props) => {
+  return (
+    <Container>
+      <PatientPage />
+    </Container>
+  )
 }
 const Container = styled.div`
-padding: 10px 20px;
+  padding: 0px 40px;
 `
-

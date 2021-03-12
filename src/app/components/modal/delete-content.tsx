@@ -1,17 +1,17 @@
 import React from 'react'
-import styled from 'styled-components';
-import {PatientDetailsType} from '../../modules/types';
+import { PatientDetailsType } from '../../modules/types'
 
-interface Props{
-    patientInfo?: PatientDetailsType
+interface Props {
+  patientData: PatientDetailsType
 }
 
-const DeleteContent: React.FC<Props> =(props)=>{
-    return(
-        <Container>
-            <h4>{props.patientInfo?.firstName + " " + props.patientInfo?.lastName }</h4>
-        </Container>
-    )
+const DeleteContent: React.FC<Props> = (props) => {
+  return (
+    <React.Fragment>
+      <h4>
+        {props.patientData.firstName} {props.patientData.lastName}
+      </h4>
+    </React.Fragment>
+  )
 }
 export default DeleteContent
-const Container = styled.div``

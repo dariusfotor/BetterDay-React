@@ -1,51 +1,34 @@
 import axios from 'axios';
+import {PatientDetailsType} from './types'
 
-export const getPatients = () => {
-  try {
+const {REACT_APP_PATIENTS_URL, REACT_APP_PATIENT_DETAILS_URL} = process.env
+export const getPatients = async () => {
     return axios
-      .get('http://localhost:3010/patients')
+      .get(`${REACT_APP_PATIENTS_URL}`)
       .then((response) => response.data);
-  } catch (err) {
-    console.log(err);
-    return Promise.resolve(null)
-  }
 };
 
-export const getPatientById = (id: number) => {
-  try {
+export const getPatientById = async (id: number) => {
     return axios
-      .get(`http://localhost:3010/patientsDetails/${id}`)
+      .get(`${REACT_APP_PATIENT_DETAILS_URL}/${id}`)
       .then((response) => response.data);
-  } catch (err) {
-    console.log(err)
-    return Promise.resolve(null)
-    ;
-  }
 };
 
-export const updatePatient = async (objectPatients: any, id?: number) => {
-  console.log(objectPatients)
-  try {
+export const updatePatient = async ([objectPatients, id]: [Omit<PatientDetailsType, "id" | "image">, number]) => {
     await axios
-      .patch(`http://localhost:3010/patientsDetails/${id}`, objectPatients)
+      .patch(`${REACT_APP_PATIENT_DETAILS_URL}/${id}`, objectPatients)
       .then((response) => response.data);
     await axios
-      .patch(`http://localhost:3010/patients/${id}`, {fullName: objectPatients.firstName + " " + objectPatients.lastName })
-      .then((response) => console.log(response.data));
-  } catch (err) {
-    console.log(err);
-  }
+      .patch(`${REACT_APP_PATIENTS_URL}/${id}`, {fullName: `${objectPatients.firstName} ${objectPatients.lastName}` })
+      .then((response) => response.data);
+
 };
 
 export const deletePatient = async (id?: number) => {
-  try {
     await axios
-      .delete(`http://localhost:3010/patientsDetails/${id}`)
+      .delete(`${REACT_APP_PATIENT_DETAILS_URL}/${id}`)
       .then((response) => response.data);
     await axios
-      .delete(`http://localhost:3010/patients/${id}`)
+      .delete(`${REACT_APP_PATIENTS_URL}/${id}`)
       .then((response) => response.data);
-  } catch (err) {
-    console.log(err);
-  }
 };
