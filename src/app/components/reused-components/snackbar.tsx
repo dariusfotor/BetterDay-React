@@ -14,23 +14,16 @@ const useStyles = makeStyles((theme) => ({
     '& > * + *': {
       marginTop: theme.spacing(2),
     },
-    position: 'fixed',
-    top: '40%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    padding: '20px',
-    zIndex: 1000,
   },
 }))
 
 interface Props {
-  openSuccess: boolean
-  setOpenSuccess: (arg: boolean) => void
-  patientId: number
-  history: any
+  open: boolean
+  theme: string
+  onClose: () => void
 }
 
-const SuccessUpdate: React.FC<Props> = (props) => {
+const SnackBar: React.FC<Props> = (props) => {
   const classes = useStyles()
 
   const handleClose = (event: any, reason: any) => {
@@ -38,17 +31,24 @@ const SuccessUpdate: React.FC<Props> = (props) => {
       return
     }
 
-    props.setOpenSuccess(false)
-    props.history.push(`/patient/${props.patientId}`)
+    props.onClose()
   }
-  const portalDiv = document.getElementById('portal')
+  const portalDiv = document.getElementById('snackbarPortal')
 
-  return portalDiv
+  return portalDiv && props.open
     ? ReactDom.createPortal(
         <div className={classes.root}>
-          <Snackbar open={props.openSuccess} onClose={handleClose}>
-            <Alert onClose={handleClose} severity="success">
-              Įrašas sėkmingai redaguotas
+          <Snackbar
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'right',
+            }}
+            open={true}
+            autoHideDuration={6000}
+            onClose={handleClose}
+          >
+            <Alert onClose={handleClose} severity={props.theme}>
+              {props.children}
             </Alert>
           </Snackbar>
         </div>,
@@ -56,4 +56,4 @@ const SuccessUpdate: React.FC<Props> = (props) => {
       )
     : null
 }
-export default SuccessUpdate
+export default SnackBar

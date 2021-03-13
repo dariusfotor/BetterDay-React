@@ -8,8 +8,8 @@ import { useHistory } from 'react-router'
 import { deletePatient } from '../../modules/actions'
 import ReactDom from 'react-dom'
 import { useMutation } from 'react-query'
-import ErrorDelete from '../patientPage/components/error-delete'
-import SuccessDelete from '../patientPage/components/success-delete'
+import SnackBar from '../reused-components/snackbar'
+import { ROUTES } from '../../routes'
 
 interface Props {
   showDeleteModal: boolean
@@ -18,25 +18,12 @@ interface Props {
 }
 
 const DeleteModal: React.FC<Props> = (props) => {
-  const [openSuccess, setOpenSuccess] = React.useState(false)
-  const [openError, setOpenError] = React.useState(false)
-
-  const mutation = useMutation(deletePatient, {
-    onSuccess: () => {
-      setOpenSuccess(true)
-    },
-    onError: () => {
-      setOpenError(true)
-    },
-  })
+  const mutation = useMutation(deletePatient)
 
   const portalDiv = document.getElementById('portal')
   const history = useHistory()
-  if (!props.showDeleteModal) {
-    return null
-  }
 
-  return portalDiv
+  return portalDiv && props.showDeleteModal
     ? ReactDom.createPortal(
         <Container>
           <div className="modal">
@@ -73,13 +60,23 @@ const DeleteModal: React.FC<Props> = (props) => {
               </div>
             </div>
           </div>
-          <SuccessDelete
-            patientId={props.patientData.id}
-            history={history}
-            openSuccess={openSuccess}
-            setOpenSuccess={setOpenSuccess}
-          />
-          <ErrorDelete openError={openError} setOpenError={setOpenError} />
+          <SnackBar
+            theme={'error'}
+            open={mutation.isError}
+            onClose={() => mutation.reset()}
+          >
+            Klaida! Bandykite dar karta
+          </SnackBar>
+          <SnackBar
+            theme={'success'}
+            open={mutation.isSuccess}
+            onClose={() => {
+              mutation.reset()
+              history.push(ROUTES.PatientsList())
+            }}
+          >
+            Įrašas sėkmingai ištrintas
+          </SnackBar>
         </Container>,
         portalDiv,
       )

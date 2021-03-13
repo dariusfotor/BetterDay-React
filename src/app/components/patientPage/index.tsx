@@ -9,6 +9,7 @@ import { useHistory } from 'react-router'
 import DeleteModal from '../modal/delete-modal'
 import MediaCard from './components/card'
 import { useQuery } from 'react-query'
+import { ROUTES } from '../../routes'
 
 interface RouteParams {
   id: string
@@ -18,10 +19,19 @@ const PatientPage = () => {
   const [showDeleteModal, setShowDeleteModal] = React.useState<boolean>(false)
   const { id } = useParams<RouteParams>()
   const history = useHistory()
-  const { isLoading, data } = useQuery<PatientDetailsType>(
+  const { isLoading, error, data } = useQuery<PatientDetailsType>(
     ['patient', id],
     () => getPatientById(+id),
   )
+
+  if (error) {
+    return (
+      <h3 style={{ textAlign: 'center', marginTop: '20px' }}>
+        Atsiprašome įvyko klaida, pabandykite perkrauti puslapį
+      </h3>
+    )
+  }
+
   return (
     <Container>
       <div>
@@ -30,13 +40,12 @@ const PatientPage = () => {
             size="small"
             variant="contained"
             startIcon={<KeyboardBackspaceIcon />}
-            onClick={() => history.push('/index')}
+            onClick={() => history.push(ROUTES.PatientsList())}
           />
         </div>
         <div className="card">
           {data ? (
             <MediaCard
-              history={history}
               setShowDeleteModal={setShowDeleteModal}
               patientData={data}
             />
@@ -62,7 +71,6 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   padding: 20px 0;
-  background-color: #bc986a;
   .buttons-container {
     display: flex;
     justify-content: center;

@@ -12,6 +12,8 @@ import Typography from '@material-ui/core/Typography'
 import { PatientDetailsType } from '../../../modules/types'
 import styled from 'styled-components'
 import moment from 'moment'
+import { useHistory } from 'react-router'
+import { ROUTES } from '../../../routes'
 
 const useStyles = makeStyles({
   root: {
@@ -33,10 +35,10 @@ const useStyles = makeStyles({
 interface Props {
   patientData: PatientDetailsType
   setShowDeleteModal: (arg: boolean) => void
-  history: any
 }
 
 const MediaCard: React.FC<Props> = (props) => {
+  const history = useHistory()
   const classes = useStyles()
   return (
     <Container>
@@ -74,7 +76,7 @@ const MediaCard: React.FC<Props> = (props) => {
             variant="contained"
             startIcon={<EditIcon />}
             onClick={() =>
-              props.history.push(`/patient/${props.patientData.id}/edit`)
+              history.push(ROUTES.PatientEdit(props.patientData.id))
             }
           />
           <Button

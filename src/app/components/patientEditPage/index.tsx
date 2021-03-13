@@ -8,11 +8,11 @@ import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import Button from '@material-ui/core/Button'
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace'
-import { TextField } from '../forms-components/text-field'
-import { DatePicker } from '../forms-components/date-picker'
+import { TextField } from '../reused-components/text-field'
+import { DatePicker } from '../reused-components/date-picker'
 import { useQuery, useMutation } from 'react-query'
-import SuccessUpdate from './components/success-update'
-import ErrorUpdate from './components/error-uptade'
+import SnackBar from '../reused-components/snackbar'
+import { ROUTES } from '../../routes'
 
 interface RouteParams {
   id: string
@@ -21,10 +21,9 @@ interface RouteParams {
 const PatientEditPage = () => {
   const history = useHistory()
   const { id } = useParams<RouteParams>()
-  const [openSuccess, setOpenSuccess] = React.useState(false)
-  const [openError, setOpenError] = React.useState(false)
-  const { error, data } = useQuery<PatientDetailsType>(['patient', id], () =>
-    getPatientById(+id),
+  const { isLoading, error, data } = useQuery<PatientDetailsType>(
+    ['patient', id],
+    () => getPatientById(+id),
   )
   const phoneRegex = /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/gm
   const PatientSchema = Yup.object().shape({
@@ -57,14 +56,7 @@ const PatientEditPage = () => {
     }
   }, [data])
 
-  const mutation = useMutation(updatePatient, {
-    onSuccess: () => {
-      setOpenSuccess(true)
-    },
-    onError: () => {
-      setOpenError(true)
-    },
-  })
+  const mutation = useMutation(updatePatient)
 
   const formik = useFormik({
     initialValues: getInitialValues(),
@@ -82,21 +74,25 @@ const PatientEditPage = () => {
     }
   }, [data])
 
-  if (!data) {
-    return null
-  }
   if (error) {
-    return <h3 style={{ textAlign: 'center', marginTop: '20px' }}>Klaida!</h3>
+    return (
+      <h3 style={{ textAlign: 'center', marginTop: '20px' }}>
+        Atsiprašome įvyko klaida, pabandykite perkrauti puslapį
+      </h3>
+    )
   }
-  return (
+  return data ? (
     <Container>
       <div className="form-container">
-        <Button
-          size="small"
-          variant="contained"
-          startIcon={<KeyboardBackspaceIcon />}
-          onClick={() => history.push(`/patient/${data.id}`)}
-        />
+        <div className="buttons-container">
+          <Button
+            size="small"
+            variant="contained"
+            startIcon={<KeyboardBackspaceIcon />}
+            onClick={() => history.push(ROUTES.Patient(data.id))}
+          />
+        </div>
+
         <form className="form" onSubmit={formik.handleSubmit}>
           <div>
             <h3>
@@ -174,15 +170,27 @@ const PatientEditPage = () => {
           </Button>
         </form>
       </div>
-      <SuccessUpdate
-        patientId={data.id}
-        history={history}
-        openSuccess={openSuccess}
-        setOpenSuccess={setOpenSuccess}
-      />
-      <ErrorUpdate openError={openError} setOpenError={setOpenError} />
+      <SnackBar
+        theme={'error'}
+        open={mutation.isError}
+        onClose={() => mutation.reset()}
+      >
+        Klaida! Bandykite dar karta
+      </SnackBar>
+      <SnackBar
+        theme={'success'}
+        open={mutation.isSuccess}
+        onClose={() => {
+          mutation.reset()
+          history.push(ROUTES.Patient(data.id))
+        }}
+      >
+        Įrašas sėkmingai atnaujintas
+      </SnackBar>
     </Container>
-  )
+  ) : isLoading ? (
+    <h3 style={{ textAlign: 'center', marginTop: '20px' }}>palaukite...</h3>
+  ) : null
 }
 
 export default PatientEditPage
@@ -196,5 +204,9 @@ const Container = styled.div`
   .form-group {
     display: flex;
     flex-direction: column;
+  }
+  .buttons-container {
+    display: flex;
+    justify-content: center;
   }
 `

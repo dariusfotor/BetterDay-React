@@ -10,15 +10,23 @@ import { PatientHomePage } from './routes/patient-route'
 import { NotFoundRoute } from './routes/not-found-route'
 import { EditPatientHomePage } from './routes/patient-edit-route'
 
+export const ROUTES = {
+  PatientsList: () => `/index`,
+  Patient: (id: number | string) => `/patient/${id}`,
+  PatientEdit: (id: number | string) => `/patient/${id}/edit`,
+}
+
 export const Routes: React.FC = () => {
-  //   const Routes = { Patient: (id: number) => `/patient/${id}` }
   return (
     <Router>
       <Switch>
         <Redirect from="/" exact={true} to="/index" />
-        <Route path="/index" component={IndexRoute} />
-        <Route path="/patient/:id/edit" component={EditPatientHomePage} />
-        <Route path="/patient/:id" component={PatientHomePage} />
+        <Route path={ROUTES.PatientsList()} component={IndexRoute} />
+        <Route
+          path={ROUTES.PatientEdit(':id')}
+          component={EditPatientHomePage}
+        />
+        <Route path={ROUTES.Patient(':id')} component={PatientHomePage} />
 
         <NotFoundRoute />
       </Switch>

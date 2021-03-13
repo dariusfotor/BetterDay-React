@@ -11,7 +11,11 @@ const PatientsListPage = () => {
   )
 
   if (error) {
-    return <h3 style={{ textAlign: 'center', marginTop: '20px' }}>Klaida!</h3>
+    return (
+      <h3 style={{ textAlign: 'center', marginTop: '20px' }}>
+        Atsiprašome įvyko klaida, pabandykite perkrauti puslapį
+      </h3>
+    )
   }
   return (
     <Container>
@@ -27,7 +31,6 @@ const PatientsListPage = () => {
 export default PatientsListPage
 const Container = styled.div`
   padding: 20px 0;
-  background-color: #bc986a;
   display: flex;
   justify-content: center;
 `

@@ -10,6 +10,7 @@ import { PatientsListTypes } from '../../../modules/types'
 import PageviewIcon from '@material-ui/icons/Pageview'
 import Button from '@material-ui/core/Button'
 import { useHistory } from 'react-router'
+import { ROUTES } from '../../../routes'
 
 interface Props {
   data: PatientsListTypes[]
@@ -23,7 +24,9 @@ const PatientsTable: React.FC<Props> = (props) => {
       <Table size="small" aria-label="Pacientų sąrašas">
         <TableHead>
           <TableRow>
-            <TableCell>Pacientai</TableCell>
+            <TableCell style={{ fontWeight: 600, fontSize: 24 }}>
+              Pacientai
+            </TableCell>
             <TableCell />
           </TableRow>
         </TableHead>
@@ -35,11 +38,9 @@ const PatientsTable: React.FC<Props> = (props) => {
               </TableCell>
               <TableCell align="right">
                 <Button
-                  className="edit-button"
                   size="small"
-                  variant="contained"
                   startIcon={<PageviewIcon />}
-                  onClick={() => history.push(`/patient/${row.id}`)}
+                  onClick={() => history.push(ROUTES.Patient(row.id))}
                 />
               </TableCell>
             </TableRow>

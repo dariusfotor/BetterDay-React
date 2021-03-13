@@ -7,11 +7,9 @@ interface Props {
 
 const DeleteContent: React.FC<Props> = (props) => {
   return (
-    <React.Fragment>
-      <h4>
-        {props.patientData.firstName} {props.patientData.lastName}
-      </h4>
-    </React.Fragment>
+    <h4>
+      {props.patientData.firstName} {props.patientData.lastName}
+    </h4>
   )
 }
 export default DeleteContent
